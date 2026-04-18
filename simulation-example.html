@@ -3,17 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clinical Path - Simulation Example</title>
-  <meta name="description" content="Clinical Path - Educational simulation example based on anamnesis / Ejemplo de simulación docente basado en anamnesis" />
+  <title>Clinical Path</title>
+  <meta name="description" content="Clinical Path - Educational Clinical Reasoning Simulator / Simulador docente de razonamiento clínico" />
   <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon.png">
-
   <style>
     :root{
       --bg: #f4f7fb;
       --surface: #ffffff;
       --surface-2: #eef4ff;
-      --surface-3: #f8fbff;
       --text: #16304a;
       --muted: #5f7185;
       --primary: #1d5fa7;
@@ -22,14 +19,13 @@
       --shadow: 0 16px 40px rgba(20, 45, 80, 0.10);
       --radius: 20px;
       --max: 1120px;
-      --warn-bg: #fff9f0;
-      --warn-border: #f0dcc0;
-      --warn-text: #74551f;
     }
 
     * { box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -69,35 +65,32 @@
       padding: 14px 0;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 0.2px;
-    }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.2px;
+}
 
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      flex: 0 0 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border-radius: 10px;
-      background: transparent;
-    }
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+}
 
-    .brand-logo {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: block;
-      background: transparent;
-    }
-
+.brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
     .nav {
       display: flex;
       align-items: center;
@@ -136,7 +129,14 @@
     }
 
     .hero {
-      padding: 56px 0 26px;
+      padding: 64px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
     }
 
     .hero-card,
@@ -181,7 +181,7 @@
 
     h1 {
       margin: 0 0 12px;
-      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-size: clamp(2rem, 4vw, 3.35rem);
       line-height: 1.08;
       letter-spacing: -0.02em;
     }
@@ -189,14 +189,88 @@
     .hero-subtitle {
       font-size: 1.18rem;
       color: var(--muted);
-      max-width: 860px;
+      max-width: 760px;
       margin: 0 0 22px;
     }
 
     .hero-copy {
       color: var(--muted);
-      max-width: 900px;
+      max-width: 760px;
+      margin: 0 0 28px;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 14px 30px rgba(44, 123, 229, 0.25);
+    }
+
+    .btn-secondary {
+      background: #fff;
+      color: var(--text);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-note {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: #f8fbff;
+      border: 1px solid #dfeafb;
+      border-radius: 16px;
+      padding: 16px 18px;
+      color: var(--muted);
+    }
+
+    .hero-side {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,249,255,0.98)),
+        var(--surface);
+    }
+
+    .side-box {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .side-box h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .side-box p {
       margin: 0;
+      color: var(--muted);
+      font-size: 0.97rem;
     }
 
     .section {
@@ -204,145 +278,73 @@
     }
 
     .section-title {
-      font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+      font-size: clamp(1.5rem, 2.5vw, 2.15rem);
       margin: 0 0 8px;
     }
 
     .section-subtitle {
       margin: 0 0 22px;
       color: var(--muted);
-      max-width: 820px;
+      max-width: 780px;
     }
 
-    .grid-main {
+    .grid-3 {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
-    .card {
-      padding: 26px;
-    }
-
-    .timeline {
-      display: grid;
-      gap: 16px;
-    }
-
-    .step {
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 16px;
-      align-items: flex-start;
-      padding: 18px;
-      background: var(--surface-3);
-      border: 1px solid #deebf8;
+    .feature-card,
+    .info-card {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(20, 45, 80, 0.06);
     }
 
-    .step-number {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
       display: grid;
       place-items: center;
-      font-size: 1.05rem;
-      font-weight: 800;
+      background: linear-gradient(135deg, #e6f0ff, #f2f7ff);
       color: var(--primary);
-      background: linear-gradient(135deg, #e6f0ff, #f3f8ff);
-      border: 1px solid #d5e5fb;
+      font-weight: 700;
+      margin-bottom: 14px;
     }
 
-    .step h3 {
-      margin: 0 0 6px;
-      font-size: 1.05rem;
+    .feature-card h3,
+    .info-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
     }
 
-    .step p {
+    .feature-card p,
+    .info-card p {
       margin: 0;
       color: var(--muted);
     }
 
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 16px;
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
     }
 
-    .chip {
-      padding: 9px 12px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--text);
-      font-size: 0.95rem;
-      box-shadow: 0 4px 12px rgba(20,45,80,0.04);
-    }
-
-    .summary-box {
+    .notice {
       padding: 22px;
       border-radius: 18px;
-      background: linear-gradient(180deg, #f8fbff, #ffffff);
-      border: 1px solid #dce9f8;
-      margin-top: 16px;
+      background: linear-gradient(180deg, #fff9f0, #fffdf8);
+      border: 1px solid #f0dcc0;
+      color: #6e5934;
+      box-shadow: 0 10px 25px rgba(125, 90, 40, 0.06);
     }
 
-    .summary-box p {
-      margin: 0;
-      color: var(--text);
-    }
-
-    .quote {
-      margin-top: 18px;
-      padding: 20px 22px;
-      border-left: 5px solid var(--primary-2);
-      background: #f7fbff;
-      border-radius: 16px;
-      color: var(--text);
-    }
-
-    .diagnosis-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .diagnosis-item {
-      padding: 16px 18px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: #fff;
-    }
-
-    .diagnosis-item.primary {
-      border-color: #bcd6f4;
-      background: linear-gradient(180deg, #f3f8ff, #ffffff);
-      box-shadow: 0 10px 24px rgba(44,123,229,0.08);
-    }
-
-    .diagnosis-item h4 {
-      margin: 0 0 6px;
-      font-size: 1.02rem;
-    }
-
-    .diagnosis-item p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .callout {
-      margin-top: 18px;
-      padding: 20px 22px;
-      border-radius: 18px;
-      background: var(--warn-bg);
-      border: 1px solid var(--warn-border);
-      color: var(--warn-text);
-    }
-
-    .callout h3 {
+    .notice h3 {
       margin: 0 0 8px;
-      font-size: 1.02rem;
+      color: #7a5620;
     }
 
     .footer {
@@ -364,7 +366,7 @@
 
     .footer-text {
       color: var(--muted);
-      max-width: 760px;
+      max-width: 720px;
     }
 
     .footer-links {
@@ -381,12 +383,18 @@
     }
 
     @media (max-width: 960px) {
-      .grid-main {
+      .hero-grid,
+      .grid-3,
+      .info-grid {
         grid-template-columns: 1fr;
       }
 
       .hero-card {
         padding: 30px 24px;
+      }
+
+      .hero-side {
+        padding: 22px;
       }
     }
 
@@ -400,13 +408,12 @@
         width: 100%;
       }
 
-      .step {
-        grid-template-columns: 1fr;
+      .cta-row {
+        flex-direction: column;
       }
 
-      .step-number {
-        width: 48px;
-        height: 48px;
+      .btn {
+        width: 100%;
       }
 
       .footer-card {
@@ -418,18 +425,16 @@
 <body>
   <header class="topbar">
     <div class="container topbar-inner">
-      <div class="brand">
-        <div class="brand-mark">
-          <img src="logo.png" alt="Clinical Path logo" class="brand-logo">
-        </div>
-        <span>Clinical Path</span>
-      </div>
-
+<div class="brand">
+  <div class="brand-mark">
+    <img src="logo2.png" alt="Clinical Path logo" class="brand-logo">
+  </div>
+  <span>Clinical Path</span>
+</div>
       <nav class="nav">
-        <a href="index.html" data-i18n="navHome">Home</a>
-        <a href="#anamnesis" data-i18n="navAnamnesis">Anamnesis</a>
-        <a href="#summary" data-i18n="navSummary">Summary</a>
-        <a href="#hypotheses" data-i18n="navHypotheses">Hypotheses</a>
+        <a href="#about" data-i18n="navAbout">About</a>
+        <a href="#features" data-i18n="navFeatures">Features</a>
+        <a href="simulation-example.html" data-i18n="navExample">Simulation Example</a>
         <a href="privacy-policy.html" data-i18n="navPrivacy">Privacy Policy</a>
         <a href="support.html" data-i18n="navSupport">Support</a>
 
@@ -443,159 +448,126 @@
 
   <main>
     <section class="hero">
-      <div class="container">
+      <div class="container hero-grid">
         <div class="hero-card">
-          <div class="eyebrow" data-i18n="eyebrow">Ejemplo de simulación docente</div>
+          <div class="eyebrow" data-i18n="eyebrow">Educational Clinical Reasoning Simulator</div>
 
-          <h1 data-i18n="heroTitle">Proceso clásico de anamnesis en un caso simulado</h1>
+          <h1 data-i18n="heroTitle">Clinical Path</h1>
 
           <p class="hero-subtitle" data-i18n="heroSubtitle">
-            Esta página ilustra cómo Clinical Path puede recrear, con fines exclusivamente educativos, la secuencia lógica que suele seguir un médico al interrogar, organizar hallazgos e integrar hipótesis diagnósticas.
+            A modern educational platform designed to support clinical reasoning practice through simulated academic scenarios.
           </p>
 
           <p class="hero-copy" data-i18n="heroCopy">
-            El objetivo no es sustituir la valoración clínica real, sino mostrar de forma didáctica cómo una simulación puede respetar el orden tradicional de la anamnesis, desde el motivo de consulta hasta la integración de posibles diagnósticos diferenciales.
+            Clinical Path helps students, instructors, and healthcare professionals strengthen diagnostic reasoning in a structured learning environment. The application is intended exclusively for educational and training purposes.
           </p>
-        </div>
-      </div>
-    </section>
 
-    <section class="section" id="anamnesis">
-      <div class="container">
-        <h2 class="section-title" data-i18n="section1Title">Secuencia de simulación basada en anamnesis</h2>
-        <p class="section-subtitle" data-i18n="section1Subtitle">
-          En este ejemplo, la simulación sigue el recorrido clásico de la práctica médica: identificación del paciente, motivo de consulta, historia del cuadro actual, antecedentes relevantes, examen físico y formulación de hipótesis diagnósticas.
-        </p>
-
-        <div class="grid-main">
-          <div class="card">
-            <div class="timeline">
-              <div class="step">
-                <div class="step-number">1</div>
-                <div>
-                  <h3 data-i18n="step1Title">Datos generales del caso</h3>
-                  <p data-i18n="step1Text">
-                    La simulación comienza con la identificación básica del caso: edad y sexo. En este ejemplo se parte de un paciente simulado de 60 años, de sexo masculino.
-                  </p>
-                </div>
-              </div>
-
-              <div class="step">
-                <div class="step-number">2</div>
-                <div>
-                  <h3 data-i18n="step2Title">Motivo de consulta</h3>
-                  <p data-i18n="step2Text">
-                    El síntoma cardinal que orienta la consulta es la disnea. Este dato dirige el interrogatorio hacia causas respiratorias y cardiovasculares agudas.
-                  </p>
-                </div>
-              </div>
-
-              <div class="step">
-                <div class="step-number">3</div>
-                <div>
-                  <h3 data-i18n="step3Title">Interrogatorio dirigido</h3>
-                  <p data-i18n="step3Text">
-                    La anamnesis progresa con preguntas orientadas a causas y factores asociados. En este ejemplo se exploran antecedentes o circunstancias relevantes como ingesta de cuerpo extraño y encamamiento prolongado.
-                  </p>
-                </div>
-              </div>
-
-              <div class="step">
-                <div class="step-number">4</div>
-                <div>
-                  <h3 data-i18n="step4Title">Examen físico simulado</h3>
-                  <p data-i18n="step4Text">
-                    Después del interrogatorio, la simulación incorpora hallazgos del examen físico. Aquí se destacan los signos de cianosis y afectación del estado general, que refuerzan la sospecha de un proceso respiratorio agudo potencialmente grave.
-                  </p>
-                </div>
-              </div>
-
-              <div class="step">
-                <div class="step-number">5</div>
-                <div>
-                  <h3 data-i18n="step5Title">Integración clínica</h3>
-                  <p data-i18n="step5Text">
-                    Finalmente, el sistema organiza los datos y formula un conjunto de hipótesis diagnósticas. En un entorno docente, esta fase enseña cómo el médico integra síntomas, antecedentes y signos para construir un diagnóstico diferencial razonado.
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="privacy-policy.html" data-i18n="ctaPrivacy">View Privacy Policy</a>
+            <a class="btn btn-secondary" href="support.html" data-i18n="ctaSupport">Contact Support</a>
+            <a class="btn btn-secondary" href="simulation-example.html" data-i18n="ctaExample">View Simulation Example</a>
           </div>
 
-          <div class="card" id="summary">
-            <h2 class="section-title" style="font-size:1.55rem; margin-bottom:6px;" data-i18n="summaryTitle">Resumen integrador del caso simulado</h2>
-            <p class="section-subtitle" style="margin-bottom:14px;" data-i18n="summarySubtitle">
-              La simulación resume la información obtenida durante la anamnesis y la exploración clínica.
+          <div class="hero-note">
+            <div>⚠️</div>
+            <div data-i18n="heroNotice">
+              This website presents Clinical Path as an educational simulator and academic training resource. It is not intended for real patient care, diagnosis, treatment, or emergency clinical decision-making.
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-side card">
+          <div class="side-box">
+            <h3 data-i18n="side1Title">Bilingual Experience</h3>
+            <p data-i18n="side1Text">
+              Content prepared for Spanish and English users, allowing a clearer and more accessible presentation.
             </p>
+          </div>
 
-            <div class="chips">
-              <div class="chip" data-i18n="chip1">Edad: 60 años</div>
-              <div class="chip" data-i18n="chip2">Sexo: masculino</div>
-              <div class="chip" data-i18n="chip3">Disnea</div>
-              <div class="chip" data-i18n="chip4">Ingesta de cuerpo extraño</div>
-              <div class="chip" data-i18n="chip5">Encamamiento prolongado</div>
-              <div class="chip" data-i18n="chip6">Cianosis</div>
-              <div class="chip" data-i18n="chip7">Afectación del estado general</div>
-            </div>
+          <div class="side-box">
+            <h3 data-i18n="side2Title">Academic Focus</h3>
+            <p data-i18n="side2Text">
+              Built to support classroom learning, individual study, case discussion, and professional training activities.
+            </p>
+          </div>
 
-            <div class="summary-box">
-              <p data-i18n="summaryBox">
-                En conjunto, la presencia de edad, sexo, disnea, ingesta de cuerpo extraño, encamamiento prolongado, cianosis y afectación del estado general puede conducir, dentro de esta simulación docente, a considerar entidades como insuficiencia respiratoria aguda, tromboembolismo pulmonar agudo, edema agudo de pulmón o neumotórax, entre otras posibilidades.
-              </p>
-            </div>
-
-            <div class="quote" data-i18n="quoteText">
-              Idea central del simulador: la enseñanza no se limita a mostrar una respuesta final, sino a reproducir el orden clásico en que un médico interroga, examina, jerarquiza hallazgos y construye el diagnóstico diferencial a partir de la anamnesis.
-            </div>
+          <div class="side-box">
+            <h3 data-i18n="side3Title">Clear Positioning</h3>
+            <p data-i18n="side3Text">
+              Presented as a teaching and simulation resource, not as a real-world clinical tool for patient management.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="hypotheses">
+    <section class="section" id="about">
       <div class="container">
-        <h2 class="section-title" data-i18n="hypothesesTitle">Hipótesis diagnósticas del ejemplo</h2>
-        <p class="section-subtitle" data-i18n="hypothesesSubtitle">
-          Estas hipótesis se muestran aquí como parte del proceso de simulación académica y del entrenamiento del razonamiento clínico.
+        <h2 class="section-title" data-i18n="aboutTitle">About Clinical Path</h2>
+        <p class="section-subtitle" data-i18n="aboutSubtitle">
+          Clinical Path is conceived as an educational simulator that allows users to explore structured clinical reasoning pathways through simulated consultations and academic scenarios.
         </p>
 
-        <div class="card">
-          <div class="diagnosis-list">
-            <div class="diagnosis-item primary">
-              <h4 data-i18n="diag1Title">Insuficiencia respiratoria aguda</h4>
-              <p data-i18n="diag1Text">
-                Se presenta como hipótesis destacada por la combinación de disnea y signos clínicos de compromiso respiratorio general.
-              </p>
-            </div>
-
-            <div class="diagnosis-item">
-              <h4 data-i18n="diag2Title">Tromboembolismo pulmonar agudo</h4>
-              <p data-i18n="diag2Text">
-                Se incluye por la importancia del encamamiento prolongado como factor de riesgo y por la aparición de disnea en un cuadro agudo.
-              </p>
-            </div>
-
-            <div class="diagnosis-item">
-              <h4 data-i18n="diag3Title">Edema agudo de pulmón</h4>
-              <p data-i18n="diag3Text">
-                Figura entre las posibilidades por su capacidad para presentarse con dificultad respiratoria severa y deterioro del estado general.
-              </p>
-            </div>
-
-            <div class="diagnosis-item">
-              <h4 data-i18n="diag4Title">Neumotórax</h4>
-              <p data-i18n="diag4Text">
-                Se considera dentro del diagnóstico diferencial de un síndrome disneico agudo, especialmente cuando el cuadro requiere valoración rápida.
-              </p>
-            </div>
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 data-i18n="aboutBox1Title">Purpose</h3>
+            <p data-i18n="aboutBox1Text">
+              To provide a professional and accessible environment for the study and practice of clinical reasoning in educational contexts.
+            </p>
           </div>
 
-          <div class="callout">
-            <h3 data-i18n="calloutTitle">Aviso docente</h3>
-            <div data-i18n="calloutText">
-              Este contenido representa un ejemplo de simulación educativa. Su función es mostrar cómo una herramienta como Clinical Path puede organizar el razonamiento clínico respetando la estructura de la anamnesis. No constituye una guía para atención médica real ni sustituye el juicio clínico profesional.
-            </div>
+          <div class="info-card">
+            <h3 data-i18n="aboutBox2Title">Audience</h3>
+            <p data-i18n="aboutBox2Text">
+              Suitable for students, instructors, academic institutions, and professionals who wish to reinforce analytical skills in training settings.
+            </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <h2 class="section-title" data-i18n="featuresTitle">Key Features</h2>
+        <p class="section-subtitle" data-i18n="featuresSubtitle">
+          Designed to communicate the value of the application with a polished and trustworthy presentation.
+        </p>
+
+        <div class="grid-3">
+          <div class="feature-card">
+            <div class="feature-icon">1</div>
+            <h3 data-i18n="feature1Title">Simulated Clinical Scenarios</h3>
+            <p data-i18n="feature1Text">
+              Explore structured academic cases intended to strengthen observation, reasoning, and interpretation skills.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">2</div>
+            <h3 data-i18n="feature2Title">Reasoning-Oriented Learning</h3>
+            <p data-i18n="feature2Text">
+              Supports the analysis of signs, symptoms, and clinical context within an educational simulation environment.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">3</div>
+            <h3 data-i18n="feature3Title">Professional Presentation</h3>
+            <p data-i18n="feature3Text">
+              Includes public pages for product overview, privacy policy, and support to prepare the app for digital distribution.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="notice">
+          <h3 data-i18n="noticeTitle">Important Notice</h3>
+          <p data-i18n="noticeText">
+            Clinical Path is presented as an educational and training resource. The content and scenarios are intended exclusively for academic use and simulation. This website does not present the application as a tool for real-world patient diagnosis, treatment, monitoring, or emergency care.
+          </p>
         </div>
       </div>
     </section>
@@ -607,14 +579,14 @@
         <div>
           <strong>Clinical Path</strong>
           <div class="footer-text" data-i18n="footerText">
-            Simulador docente de razonamiento clínico orientado a la enseñanza, la práctica académica y la presentación estructurada de casos simulados.
+            Educational clinical reasoning simulator for academic and training environments.
           </div>
         </div>
 
         <div class="footer-links">
-          <a href="index.html" data-i18n="footerHome">Home</a>
-          <a href="privacy-policy.html" data-i18n="footerPrivacy">Política de Privacidad</a>
-          <a href="support.html" data-i18n="footerSupport">Soporte</a>
+          <a href="simulation-example.html" data-i18n="footerExample">Simulation Example</a>
+          <a href="privacy-policy.html" data-i18n="footerPrivacy">Privacy Policy</a>
+          <a href="support.html" data-i18n="footerSupport">Support</a>
         </div>
       </div>
     </div>
@@ -623,117 +595,96 @@
   <script>
     const translations = {
       es: {
-        navHome: "Inicio",
-        navAnamnesis: "Anamnesis",
-        navSummary: "Resumen",
-        navHypotheses: "Hipótesis",
+        navAbout: "Acerca de",
+        navFeatures: "Características",
+        navExample: "Ejemplo de simulación",
         navPrivacy: "Política de Privacidad",
         navSupport: "Soporte",
 
-        eyebrow: "Ejemplo de simulación docente",
-        heroTitle: "Proceso clásico de anamnesis en un caso simulado",
-        heroSubtitle: "Esta página ilustra cómo Clinical Path puede recrear, con fines exclusivamente educativos, la secuencia lógica que suele seguir un médico al interrogar, organizar hallazgos e integrar hipótesis diagnósticas.",
-        heroCopy: "El objetivo no es sustituir la valoración clínica real, sino mostrar de forma didáctica cómo una simulación puede respetar el orden tradicional de la anamnesis, desde el motivo de consulta hasta la integración de posibles diagnósticos diferenciales.",
+        eyebrow: "Simulador docente de razonamiento clínico",
+        heroTitle: "Clinical Path",
+        heroSubtitle: "Una plataforma educativa moderna diseñada para apoyar la práctica del razonamiento clínico mediante escenarios académicos simulados.",
+        heroCopy: "Clinical Path ayuda a estudiantes, docentes y profesionales de la salud a fortalecer el razonamiento diagnóstico en un entorno de aprendizaje estructurado. La aplicación está destinada exclusivamente a fines educativos y de entrenamiento.",
+        ctaPrivacy: "Ver Política de Privacidad",
+        ctaSupport: "Contactar Soporte",
+        ctaExample: "Ver ejemplo de simulación",
+        heroNotice: "Este sitio presenta Clinical Path como un simulador educativo y recurso de formación académica. No está destinado a la atención real de pacientes, al diagnóstico, al tratamiento ni a la toma de decisiones clínicas en emergencias.",
 
-        section1Title: "Secuencia de simulación basada en anamnesis",
-        section1Subtitle: "En este ejemplo, la simulación sigue el recorrido clásico de la práctica médica: identificación del paciente, motivo de consulta, historia del cuadro actual, antecedentes relevantes, examen físico y formulación de hipótesis diagnósticas.",
+        side1Title: "Experiencia bilingüe",
+        side1Text: "Contenido preparado para usuarios en español e inglés, con una presentación más clara y accesible.",
+        side2Title: "Enfoque académico",
+        side2Text: "Desarrollado para apoyar clases, estudio individual, discusión de casos y actividades de formación profesional.",
+        side3Title: "Posicionamiento claro",
+        side3Text: "Presentado como un recurso docente y de simulación, no como una herramienta clínica real para manejo de pacientes.",
 
-        step1Title: "Datos generales del caso",
-        step1Text: "La simulación comienza con la identificación básica del caso: edad y sexo. En este ejemplo se parte de un paciente simulado de 60 años, de sexo masculino.",
-        step2Title: "Motivo de consulta",
-        step2Text: "El síntoma cardinal que orienta la consulta es la disnea. Este dato dirige el interrogatorio hacia causas respiratorias y cardiovasculares agudas.",
-        step3Title: "Interrogatorio dirigido",
-        step3Text: "La anamnesis progresa con preguntas orientadas a causas y factores asociados. En este ejemplo se exploran antecedentes o circunstancias relevantes como ingesta de cuerpo extraño y encamamiento prolongado.",
-        step4Title: "Examen físico simulado",
-        step4Text: "Después del interrogatorio, la simulación incorpora hallazgos del examen físico. Aquí se destacan los signos de cianosis y afectación del estado general, que refuerzan la sospecha de un proceso respiratorio agudo potencialmente grave.",
-        step5Title: "Integración clínica",
-        step5Text: "Finalmente, el sistema organiza los datos y formula un conjunto de hipótesis diagnósticas. En un entorno docente, esta fase enseña cómo el médico integra síntomas, antecedentes y signos para construir un diagnóstico diferencial razonado.",
+        aboutTitle: "Acerca de Clinical Path",
+        aboutSubtitle: "Clinical Path se concibe como un simulador educativo que permite explorar rutas estructuradas de razonamiento clínico a través de consultas simuladas y escenarios académicos.",
+        aboutBox1Title: "Propósito",
+        aboutBox1Text: "Brindar un entorno profesional y accesible para el estudio y la práctica del razonamiento clínico en contextos educativos.",
+        aboutBox2Title: "Público",
+        aboutBox2Text: "Adecuado para estudiantes, docentes, instituciones académicas y profesionales que deseen reforzar habilidades analíticas en entornos de formación.",
 
-        summaryTitle: "Resumen integrador del caso simulado",
-        summarySubtitle: "La simulación resume la información obtenida durante la anamnesis y la exploración clínica.",
-        chip1: "Edad: 60 años",
-        chip2: "Sexo: masculino",
-        chip3: "Disnea",
-        chip4: "Ingesta de cuerpo extraño",
-        chip5: "Encamamiento prolongado",
-        chip6: "Cianosis",
-        chip7: "Afectación del estado general",
-        summaryBox: "En conjunto, la presencia de edad, sexo, disnea, ingesta de cuerpo extraño, encamamiento prolongado, cianosis y afectación del estado general puede conducir, dentro de esta simulación docente, a considerar entidades como insuficiencia respiratoria aguda, tromboembolismo pulmonar agudo, edema agudo de pulmón o neumotórax, entre otras posibilidades.",
-        quoteText: "Idea central del simulador: la enseñanza no se limita a mostrar una respuesta final, sino a reproducir el orden clásico en que un médico interroga, examina, jerarquiza hallazgos y construye el diagnóstico diferencial a partir de la anamnesis.",
+        featuresTitle: "Características principales",
+        featuresSubtitle: "Diseñado para comunicar el valor de la aplicación con una presentación cuidada y confiable.",
+        feature1Title: "Escenarios clínicos simulados",
+        feature1Text: "Explora casos académicos estructurados pensados para fortalecer la observación, el razonamiento y la interpretación.",
+        feature2Title: "Aprendizaje orientado al razonamiento",
+        feature2Text: "Apoya el análisis de signos, síntomas y contexto clínico dentro de un entorno de simulación educativa.",
+        feature3Title: "Presentación profesional",
+        feature3Text: "Incluye páginas públicas de presentación, política de privacidad y soporte para preparar la app para su distribución digital.",
 
-        hypothesesTitle: "Hipótesis diagnósticas del ejemplo",
-        hypothesesSubtitle: "Estas hipótesis se muestran aquí como parte del proceso de simulación académica y del entrenamiento del razonamiento clínico.",
-        diag1Title: "Insuficiencia respiratoria aguda",
-        diag1Text: "Se presenta como hipótesis destacada por la combinación de disnea y signos clínicos de compromiso respiratorio general.",
-        diag2Title: "Tromboembolismo pulmonar agudo",
-        diag2Text: "Se incluye por la importancia del encamamiento prolongado como factor de riesgo y por la aparición de disnea en un cuadro agudo.",
-        diag3Title: "Edema agudo de pulmón",
-        diag3Text: "Figura entre las posibilidades por su capacidad para presentarse con dificultad respiratoria severa y deterioro del estado general.",
-        diag4Title: "Neumotórax",
-        diag4Text: "Se considera dentro del diagnóstico diferencial de un síndrome disneico agudo, especialmente cuando el cuadro requiere valoración rápida.",
-        calloutTitle: "Aviso docente",
-        calloutText: "Este contenido representa un ejemplo de simulación educativa. Su función es mostrar cómo una herramienta como Clinical Path puede organizar el razonamiento clínico respetando la estructura de la anamnesis. No constituye una guía para atención médica real ni sustituye el juicio clínico profesional.",
+        noticeTitle: "Aviso importante",
+        noticeText: "Clinical Path se presenta como un recurso educativo y de entrenamiento. El contenido y los escenarios están destinados exclusivamente al uso académico y a la simulación. Este sitio no presenta la aplicación como herramienta para diagnóstico, tratamiento, monitorización ni atención de urgencias en pacientes reales.",
 
-        footerText: "Simulador docente de razonamiento clínico orientado a la enseñanza, la práctica académica y la presentación estructurada de casos simulados.",
-        footerHome: "Inicio",
+        footerText: "Simulador docente de razonamiento clínico para entornos académicos y de formación.",
+        footerExample: "Ejemplo de simulación",
         footerPrivacy: "Política de Privacidad",
         footerSupport: "Soporte"
       },
-
       en: {
-        navHome: "Home",
-        navAnamnesis: "Anamnesis",
-        navSummary: "Summary",
-        navHypotheses: "Hypotheses",
+        navAbout: "About",
+        navFeatures: "Features",
+        navExample: "Simulation Example",
         navPrivacy: "Privacy Policy",
         navSupport: "Support",
 
-        eyebrow: "Educational simulation example",
-        heroTitle: "Classic anamnesis process in a simulated case",
-        heroSubtitle: "This page illustrates how Clinical Path can recreate, for educational purposes only, the logical sequence commonly followed by a physician to question, organize findings, and integrate diagnostic hypotheses.",
-        heroCopy: "The goal is not to replace real clinical assessment, but to show in a didactic way how a simulation can respect the traditional order of anamnesis, from the chief complaint to the integration of possible differential diagnoses.",
+        eyebrow: "Educational Clinical Reasoning Simulator",
+        heroTitle: "Clinical Path",
+        heroSubtitle: "A modern educational platform designed to support clinical reasoning practice through simulated academic scenarios.",
+        heroCopy: "Clinical Path helps students, instructors, and healthcare professionals strengthen diagnostic reasoning in a structured learning environment. The application is intended exclusively for educational and training purposes.",
+        ctaPrivacy: "View Privacy Policy",
+        ctaSupport: "Contact Support",
+        ctaExample: "View Simulation Example",
+        heroNotice: "This website presents Clinical Path as an educational simulator and academic training resource. It is not intended for real patient care, diagnosis, treatment, or emergency clinical decision-making.",
 
-        section1Title: "Simulation sequence based on anamnesis",
-        section1Subtitle: "In this example, the simulation follows the classic pathway of medical practice: patient identification, chief complaint, history of the current condition, relevant background, physical examination, and formulation of diagnostic hypotheses.",
+        side1Title: "Bilingual Experience",
+        side1Text: "Content prepared for Spanish and English users, allowing a clearer and more accessible presentation.",
+        side2Title: "Academic Focus",
+        side2Text: "Built to support classroom learning, individual study, case discussion, and professional training activities.",
+        side3Title: "Clear Positioning",
+        side3Text: "Presented as a teaching and simulation resource, not as a real-world clinical tool for patient management.",
 
-        step1Title: "General case data",
-        step1Text: "The simulation begins with the basic identification of the case: age and sex. In this example, the simulated patient is a 60-year-old male.",
-        step2Title: "Chief complaint",
-        step2Text: "The cardinal symptom guiding the consultation is dyspnea. This finding directs the questioning toward acute respiratory and cardiovascular causes.",
-        step3Title: "Focused questioning",
-        step3Text: "The anamnesis progresses through questions aimed at causes and associated factors. In this example, relevant circumstances such as foreign body ingestion and prolonged bed rest are explored.",
-        step4Title: "Simulated physical examination",
-        step4Text: "After the interview, the simulation incorporates physical examination findings. In this example, cyanosis and impaired general condition are highlighted, reinforcing suspicion of a potentially severe acute respiratory process.",
-        step5Title: "Clinical integration",
-        step5Text: "Finally, the system organizes the data and formulates a set of diagnostic hypotheses. In an educational environment, this phase teaches how physicians integrate symptoms, history, and signs to build a reasoned differential diagnosis.",
+        aboutTitle: "About Clinical Path",
+        aboutSubtitle: "Clinical Path is conceived as an educational simulator that allows users to explore structured clinical reasoning pathways through simulated consultations and academic scenarios.",
+        aboutBox1Title: "Purpose",
+        aboutBox1Text: "To provide a professional and accessible environment for the study and practice of clinical reasoning in educational contexts.",
+        aboutBox2Title: "Audience",
+        aboutBox2Text: "Suitable for students, instructors, academic institutions, and professionals who wish to reinforce analytical skills in training settings.",
 
-        summaryTitle: "Integrative summary of the simulated case",
-        summarySubtitle: "The simulation summarizes the information obtained during anamnesis and clinical exploration.",
-        chip1: "Age: 60 years",
-        chip2: "Sex: male",
-        chip3: "Dyspnea",
-        chip4: "Foreign body ingestion",
-        chip5: "Prolonged bed rest",
-        chip6: "Cyanosis",
-        chip7: "Impaired general condition",
-        summaryBox: "Taken together, the presence of age, sex, dyspnea, foreign body ingestion, prolonged bed rest, cyanosis, and impaired general condition may lead, within this educational simulation, to considering entities such as acute respiratory failure, acute pulmonary thromboembolism, acute pulmonary edema, or pneumothorax, among other possibilities.",
-        quoteText: "Core idea of the simulator: teaching is not limited to showing a final answer, but to reproducing the classic order in which a physician questions, examines, prioritizes findings, and builds a differential diagnosis based on anamnesis.",
+        featuresTitle: "Key Features",
+        featuresSubtitle: "Designed to communicate the value of the application with a polished and trustworthy presentation.",
+        feature1Title: "Simulated Clinical Scenarios",
+        feature1Text: "Explore structured academic cases intended to strengthen observation, reasoning, and interpretation skills.",
+        feature2Title: "Reasoning-Oriented Learning",
+        feature2Text: "Supports the analysis of signs, symptoms, and clinical context within an educational simulation environment.",
+        feature3Title: "Professional Presentation",
+        feature3Text: "Includes public pages for product overview, privacy policy, and support to prepare the app for digital distribution.",
 
-        hypothesesTitle: "Diagnostic hypotheses in this example",
-        hypothesesSubtitle: "These hypotheses are shown here as part of the academic simulation process and clinical reasoning training.",
-        diag1Title: "Acute respiratory failure",
-        diag1Text: "Presented as a leading hypothesis because of the combination of dyspnea and signs of generalized respiratory compromise.",
-        diag2Title: "Acute pulmonary thromboembolism",
-        diag2Text: "Included because of the importance of prolonged bed rest as a risk factor and the presence of dyspnea in an acute setting.",
-        diag3Title: "Acute pulmonary edema",
-        diag3Text: "Listed among the possibilities because it may present with severe respiratory distress and deterioration of the general condition.",
-        diag4Title: "Pneumothorax",
-        diag4Text: "Considered within the differential diagnosis of an acute dyspneic syndrome, especially when the case requires prompt evaluation.",
-        calloutTitle: "Educational notice",
-        calloutText: "This content represents an example of educational simulation. Its function is to show how a tool like Clinical Path can organize clinical reasoning while respecting the structure of anamnesis. It does not constitute a guide for real medical care and does not replace professional clinical judgment.",
+        noticeTitle: "Important Notice",
+        noticeText: "Clinical Path is presented as an educational and training resource. The content and scenarios are intended exclusively for academic use and simulation. This website does not present the application as a tool for real-world patient diagnosis, treatment, monitoring, or emergency care.",
 
-        footerText: "Educational clinical reasoning simulator focused on teaching, academic practice, and structured presentation of simulated cases.",
-        footerHome: "Home",
+        footerText: "Educational clinical reasoning simulator for academic and training environments.",
+        footerExample: "Simulation Example",
         footerPrivacy: "Privacy Policy",
         footerSupport: "Support"
       }
