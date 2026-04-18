@@ -1,231 +1,701 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Clinical Path</title>
-<meta name="description" content="Clinical Path - Educational Clinical Reasoning Simulator / Simulador docente de razonamiento clínico" />
-<style>
-:root{
---bg: #f4f7fb;
---surface: #ffffff;
---surface-2: #eef4ff;
---text: #16304a;
---muted: #5f7185;
---primary: #1d5fa7;
---primary-2: #2c7be5;
---border: #d8e3f0;
---shadow: 0 16px 40px rgba(20, 45, 80, 0.10);
---radius: 20px;
---max: 1120px;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinical Path</title>
+  <meta name="description" content="Clinical Path - Educational Clinical Reasoning Simulator / Simulador docente de razonamiento clínico" />
+  <style>
+    :root{
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-2: #eef4ff;
+      --text: #16304a;
+      --muted: #5f7185;
+      --primary: #1d5fa7;
+      --primary-2: #2c7be5;
+      --border: #d8e3f0;
+      --shadow: 0 16px 40px rgba(20, 45, 80, 0.10);
+      --radius: 20px;
+      --max: 1120px;
+    }
 
-* { box-sizing: border-box; }
+    * { box-sizing: border-box; }
 
-html {
-scroll-behavior: smooth;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-body {
-margin: 0;
-font-family: "Segoe UI", Arial, sans-serif;
-background:
-radial-gradient(circle at top left, #dfeeff 0%, transparent 28%),
-radial-gradient(circle at top right, #e8f3ff 0%, transparent 22%),
-var(--bg);
-color: var(--text);
-line-height: 1.6;
-}
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, #dfeeff 0%, transparent 28%),
+        radial-gradient(circle at top right, #e8f3ff 0%, transparent 22%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
-a {
-color: inherit;
-text-decoration: none;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-.container {
-width: min(100% - 32px, var(--max));
-margin: 0 auto;
-}
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
 
-.topbar {
-position: sticky;
-top: 0;
-z-index: 20;
-backdrop-filter: blur(10px);
-background: rgba(244, 247, 251, 0.85);
-border-bottom: 1px solid rgba(216, 227, 240, 0.8);
-}
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(244, 247, 251, 0.85);
+      border-bottom: 1px solid rgba(216, 227, 240, 0.8);
+    }
 
-.topbar-inner {
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 16px;
-padding: 14px 0;
-}
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
 
-.brand {
-display: flex;
-align-items: center;
-gap: 12px;
-font-weight: 700;
-font-size: 1.1rem;
-letter-spacing: 0.2px;
-}
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.2px;
+    }
 
-.brand-mark {
-width: 42px;
-height: 42px;
-border-radius: 14px;
-background: linear-gradient(135deg, var(--primary), var(--primary-2));
-display: grid;
-place-items: center;
-color: #fff;
-font-size: 1.05rem;
-box-shadow: 0 10px 22px rgba(44, 123, 229, 0.25);
-}
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 1.05rem;
+      box-shadow: 0 10px 22px rgba(44, 123, 229, 0.25);
+    }
 
-.nav {
-display: flex;
-align-items: center;
-gap: 10px;
-flex-wrap: wrap;
-}
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
 
-.nav a,
-.lang-btn {
-border: 1px solid var(--border);
-background: #fff;
-color: var(--text);
-padding: 10px 14px;
-border-radius: 999px;
-font-size: 0.95rem;
-transition: 0.2s ease;
-cursor: pointer;
-}
+    .nav a,
+    .lang-btn {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
 
-.nav a:hover,
-.lang-btn:hover {
-transform: translateY(-1px);
-border-color: #bfd2e7;
-box-shadow: 0 8px 18px rgba(20, 45, 80, 0.08);
-}
+    .nav a:hover,
+    .lang-btn:hover {
+      transform: translateY(-1px);
+      border-color: #bfd2e7;
+      box-shadow: 0 8px 18px rgba(20, 45, 80, 0.08);
+    }
 
-.lang-switch {
-display: flex;
-gap: 8px;
-}
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
 
-.lang-btn.active {
-background: linear-gradient(135deg, var(--primary), var(--primary-2));
-color: #fff;
-border-color: transparent;
-}
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff;
+      border-color: transparent;
+    }
 
-.hero {
-padding: 64px 0 36px;
-}
+    .hero {
+      padding: 64px 0 36px;
+    }
 
-.hero-grid {
-display: grid;
-grid-template-columns: 1.15fr 0.85fr;
-gap: 28px;
-align-items: stretch;
-}
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
 
-.hero-card,
-.card {
-background: var(--surface);
-border: 1px solid var(--border);
-border-radius: var(--radius);
-box-shadow: var(--shadow);
-}
+    .hero-card,
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
 
-.hero-card {
-padding: 42px;
-position: relative;
-overflow: hidden;
-}
+    .hero-card {
+      padding: 42px;
+      position: relative;
+      overflow: hidden;
+    }
 
-.hero-card::after {
-content: "";
-position: absolute;
-right: -80px;
-top: -80px;
-width: 220px;
-height: 220px;
-border-radius: 50%;
-background: radial-gradient(circle, rgba(44,123,229,0.15) 0%, rgba(44,123,229,0.02) 65%, transparent 70%);
-pointer-events: none;
-}
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(44,123,229,0.15) 0%, rgba(44,123,229,0.02) 65%, transparent 70%);
+      pointer-events: none;
+    }
 
-.eyebrow {
-display: inline-flex;
-align-items: center;
-gap: 8px;
-background: var(--surface-2);
-color: var(--primary);
-padding: 8px 14px;
-border-radius: 999px;
-border: 1px solid #d5e6ff;
-font-size: 0.9rem;
-font-weight: 600;
-margin-bottom: 18px;
-}
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-2);
+      color: var(--primary);
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid #d5e6ff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
 
-h1 {
-margin: 0 0 12px;
-font-size: clamp(2rem, 4vw, 3.35rem);
-line-height: 1.08;
-letter-spacing: -0.02em;
-}
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
 
-.hero-subtitle {
-font-size: 1.18rem;
-color: var(--muted);
-max-width: 760px;
-margin: 0 0 22px;
-}
+    .hero-subtitle {
+      font-size: 1.18rem;
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 0 22px;
+    }
 
-.hero-copy {
-color: var(--muted);
-max-width: 760px;
-margin: 0 0 28px;
-}
+    .hero-copy {
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 0 28px;
+    }
 
-.cta-row {
-display: flex;
-gap: 12px;
-flex-wrap: wrap;
-margin-bottom: 24px;
-}
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
 
-.btn {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-gap: 10px;
-padding: 13px 18px;
-border-radius: 14px;
-font-weight: 600;
-border: 1px solid var(--border);
-transition: 0.2s ease;
-}
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      transition: 0.2s ease;
+    }
 
-.btn-primary {
-background: linear-gradient(135deg, var(--primary), var(--primary-2));
-color: #fff;
-border-color: transparent;
-box-shadow: 0 14px 30px rgba(44, 123, 229, 0.25);
-}
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 14px 30px rgba(44, 123, 229, 0.25);
+    }
 
-.btn-secondary {
-background: #fff;
-color: var(--text);
-}
+    .btn-secondary {
+      background: #fff;
+      color: var(--text);
+    }
 
-.btn:hover {
-transform: translateY(-1px);
-}
+    .btn:hover {
+      transform: translateY(-1px);
+    }
 
-.hero-note {
+    .hero-note {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      background: #f8fbff;
+      border: 1px solid #dfeafb;
+      border-radius: 16px;
+      padding: 16px 18px;
+      color: var(--muted);
+    }
+
+    .hero-side {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,249,255,0.98)),
+        var(--surface);
+    }
+
+    .side-box {
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+
+    .side-box h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .side-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .section {
+      padding: 18px 0 34px;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 2.5vw, 2.15rem);
+      margin: 0 0 8px;
+    }
+
+    .section-subtitle {
+      margin: 0 0 22px;
+      color: var(--muted);
+      max-width: 780px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card,
+    .info-card {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(20, 45, 80, 0.06);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #e6f0ff, #f2f7ff);
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .feature-card h3,
+    .info-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
+    }
+
+    .feature-card p,
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .notice {
+      padding: 22px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fff9f0, #fffdf8);
+      border: 1px solid #f0dcc0;
+      color: #6e5934;
+      box-shadow: 0 10px 25px rgba(125, 90, 40, 0.06);
+    }
+
+    .notice h3 {
+      margin: 0 0 8px;
+      color: #7a5620;
+    }
+
+    .footer {
+      padding: 24px 0 42px;
+    }
+
+    .footer-card {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 22px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(20, 45, 80, 0.06);
+    }
+
+    .footer-text {
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .grid-3,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        padding: 30px 24px;
+      }
+
+      .hero-side {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        width: 100%;
+      }
+
+      .cta-row {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .footer-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">CP</div>
+        <span>Clinical Path</span>
+      </div>
+
+      <nav class="nav">
+        <a href="#about" data-i18n="navAbout">About</a>
+        <a href="#features" data-i18n="navFeatures">Features</a>
+        <a href="privacy-policy.html" data-i18n="navPrivacy">Privacy Policy</a>
+        <a href="support.html" data-i18n="navSupport">Support</a>
+
+        <div class="lang-switch">
+          <button class="lang-btn active" id="btn-es" type="button">ES</button>
+          <button class="lang-btn" id="btn-en" type="button">EN</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="eyebrow" data-i18n="eyebrow">Educational Clinical Reasoning Simulator</div>
+
+          <h1 data-i18n="heroTitle">Clinical Path</h1>
+
+          <p class="hero-subtitle" data-i18n="heroSubtitle">
+            A modern educational platform designed to support clinical reasoning practice through simulated academic scenarios.
+          </p>
+
+          <p class="hero-copy" data-i18n="heroCopy">
+            Clinical Path helps students, instructors, and healthcare professionals strengthen diagnostic reasoning in a structured learning environment. The application is intended exclusively for educational and training purposes.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="privacy-policy.html" data-i18n="ctaPrivacy">View Privacy Policy</a>
+            <a class="btn btn-secondary" href="support.html" data-i18n="ctaSupport">Contact Support</a>
+          </div>
+
+          <div class="hero-note">
+            <div>⚠️</div>
+            <div data-i18n="heroNotice">
+              This website presents Clinical Path as an educational simulator and academic training resource. It is not intended for real patient care, diagnosis, treatment, or emergency clinical decision-making.
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-side card">
+          <div class="side-box">
+            <h3 data-i18n="side1Title">Bilingual Experience</h3>
+            <p data-i18n="side1Text">
+              Content prepared for Spanish and English users, allowing a clearer and more accessible presentation.
+            </p>
+          </div>
+
+          <div class="side-box">
+            <h3 data-i18n="side2Title">Academic Focus</h3>
+            <p data-i18n="side2Text">
+              Built to support classroom learning, individual study, case discussion, and professional training activities.
+            </p>
+          </div>
+
+          <div class="side-box">
+            <h3 data-i18n="side3Title">Clear Positioning</h3>
+            <p data-i18n="side3Text">
+              Presented as a teaching and simulation resource, not as a real-world clinical tool for patient management.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section-title" data-i18n="aboutTitle">About Clinical Path</h2>
+        <p class="section-subtitle" data-i18n="aboutSubtitle">
+          Clinical Path is conceived as an educational simulator that allows users to explore structured clinical reasoning pathways through simulated consultations and academic scenarios.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <h3 data-i18n="aboutBox1Title">Purpose</h3>
+            <p data-i18n="aboutBox1Text">
+              To provide a professional and accessible environment for the study and practice of clinical reasoning in educational contexts.
+            </p>
+          </div>
+
+          <div class="info-card">
+            <h3 data-i18n="aboutBox2Title">Audience</h3>
+            <p data-i18n="aboutBox2Text">
+              Suitable for students, instructors, academic institutions, and professionals who wish to reinforce analytical skills in training settings.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="container">
+        <h2 class="section-title" data-i18n="featuresTitle">Key Features</h2>
+        <p class="section-subtitle" data-i18n="featuresSubtitle">
+          Designed to communicate the value of the application with a polished and trustworthy presentation.
+        </p>
+
+        <div class="grid-3">
+          <div class="feature-card">
+            <div class="feature-icon">1</div>
+            <h3 data-i18n="feature1Title">Simulated Clinical Scenarios</h3>
+            <p data-i18n="feature1Text">
+              Explore structured academic cases intended to strengthen observation, reasoning, and interpretation skills.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">2</div>
+            <h3 data-i18n="feature2Title">Reasoning-Oriented Learning</h3>
+            <p data-i18n="feature2Text">
+              Supports the analysis of signs, symptoms, and clinical context within an educational simulation environment.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">3</div>
+            <h3 data-i18n="feature3Title">Professional Presentation</h3>
+            <p data-i18n="feature3Text">
+              Includes public pages for product overview, privacy policy, and support to prepare the app for digital distribution.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="notice">
+          <h3 data-i18n="noticeTitle">Important Notice</h3>
+          <p data-i18n="noticeText">
+            Clinical Path is presented as an educational and training resource. The content and scenarios are intended exclusively for academic use and simulation. This website does not present the application as a tool for real-world patient diagnosis, treatment, monitoring, or emergency care.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card">
+        <div>
+          <strong>Clinical Path</strong>
+          <div class="footer-text" data-i18n="footerText">
+            Educational clinical reasoning simulator for academic and training environments.
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <a href="privacy-policy.html" data-i18n="footerPrivacy">Privacy Policy</a>
+          <a href="support.html" data-i18n="footerSupport">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      es: {
+        navAbout: "Acerca de",
+        navFeatures: "Características",
+        navPrivacy: "Política de Privacidad",
+        navSupport: "Soporte",
+
+        eyebrow: "Simulador docente de razonamiento clínico",
+        heroTitle: "Clinical Path",
+        heroSubtitle: "Una plataforma educativa moderna diseñada para apoyar la práctica del razonamiento clínico mediante escenarios académicos simulados.",
+        heroCopy: "Clinical Path ayuda a estudiantes, docentes y profesionales de la salud a fortalecer el razonamiento diagnóstico en un entorno de aprendizaje estructurado. La aplicación está destinada exclusivamente a fines educativos y de entrenamiento.",
+        ctaPrivacy: "Ver Política de Privacidad",
+        ctaSupport: "Contactar Soporte",
+        heroNotice: "Este sitio presenta Clinical Path como un simulador educativo y recurso de formación académica. No está destinado a la atención real de pacientes, al diagnóstico, al tratamiento ni a la toma de decisiones clínicas en emergencias.",
+
+        side1Title: "Experiencia bilingüe",
+        side1Text: "Contenido preparado para usuarios en español e inglés, con una presentación más clara y accesible.",
+        side2Title: "Enfoque académico",
+        side2Text: "Desarrollado para apoyar clases, estudio individual, discusión de casos y actividades de formación profesional.",
+        side3Title: "Posicionamiento claro",
+        side3Text: "Presentado como un recurso docente y de simulación, no como una herramienta clínica real para manejo de pacientes.",
+
+        aboutTitle: "Acerca de Clinical Path",
+        aboutSubtitle: "Clinical Path se concibe como un simulador educativo que permite explorar rutas estructuradas de razonamiento clínico a través de consultas simuladas y escenarios académicos.",
+        aboutBox1Title: "Propósito",
+        aboutBox1Text: "Brindar un entorno profesional y accesible para el estudio y la práctica del razonamiento clínico en contextos educativos.",
+        aboutBox2Title: "Público",
+        aboutBox2Text: "Adecuado para estudiantes, docentes, instituciones académicas y profesionales que deseen reforzar habilidades analíticas en entornos de formación.",
+
+        featuresTitle: "Características principales",
+        featuresSubtitle: "Diseñado para comunicar el valor de la aplicación con una presentación cuidada y confiable.",
+        feature1Title: "Escenarios clínicos simulados",
+        feature1Text: "Explora casos académicos estructurados pensados para fortalecer la observación, el razonamiento y la interpretación.",
+        feature2Title: "Aprendizaje orientado al razonamiento",
+        feature2Text: "Apoya el análisis de signos, síntomas y contexto clínico dentro de un entorno de simulación educativa.",
+        feature3Title: "Presentación profesional",
+        feature3Text: "Incluye páginas públicas de presentación, política de privacidad y soporte para preparar la app para su distribución digital.",
+
+        noticeTitle: "Aviso importante",
+        noticeText: "Clinical Path se presenta como un recurso educativo y de entrenamiento. El contenido y los escenarios están destinados exclusivamente al uso académico y a la simulación. Este sitio no presenta la aplicación como herramienta para diagnóstico, tratamiento, monitorización ni atención de urgencias en pacientes reales.",
+
+        footerText: "Simulador docente de razonamiento clínico para entornos académicos y de formación.",
+        footerPrivacy: "Política de Privacidad",
+        footerSupport: "Soporte"
+      },
+      en: {
+        navAbout: "About",
+        navFeatures: "Features",
+        navPrivacy: "Privacy Policy",
+        navSupport: "Support",
+
+        eyebrow: "Educational Clinical Reasoning Simulator",
+        heroTitle: "Clinical Path",
+        heroSubtitle: "A modern educational platform designed to support clinical reasoning practice through simulated academic scenarios.",
+        heroCopy: "Clinical Path helps students, instructors, and healthcare professionals strengthen diagnostic reasoning in a structured learning environment. The application is intended exclusively for educational and training purposes.",
+        ctaPrivacy: "View Privacy Policy",
+        ctaSupport: "Contact Support",
+        heroNotice: "This website presents Clinical Path as an educational simulator and academic training resource. It is not intended for real patient care, diagnosis, treatment, or emergency clinical decision-making.",
+
+        side1Title: "Bilingual Experience",
+        side1Text: "Content prepared for Spanish and English users, allowing a clearer and more accessible presentation.",
+        side2Title: "Academic Focus",
+        side2Text: "Built to support classroom learning, individual study, case discussion, and professional training activities.",
+        side3Title: "Clear Positioning",
+        side3Text: "Presented as a teaching and simulation resource, not as a real-world clinical tool for patient management.",
+
+        aboutTitle: "About Clinical Path",
+        aboutSubtitle: "Clinical Path is conceived as an educational simulator that allows users to explore structured clinical reasoning pathways through simulated consultations and academic scenarios.",
+        aboutBox1Title: "Purpose",
+        aboutBox1Text: "To provide a professional and accessible environment for the study and practice of clinical reasoning in educational contexts.",
+        aboutBox2Title: "Audience",
+        aboutBox2Text: "Suitable for students, instructors, academic institutions, and professionals who wish to reinforce analytical skills in training settings.",
+
+        featuresTitle: "Key Features",
+        featuresSubtitle: "Designed to communicate the value of the application with a polished and trustworthy presentation.",
+        feature1Title: "Simulated Clinical Scenarios",
+        feature1Text: "Explore structured academic cases intended to strengthen observation, reasoning, and interpretation skills.",
+        feature2Title: "Reasoning-Oriented Learning",
+        feature2Text: "Supports the analysis of signs, symptoms, and clinical context within an educational simulation environment.",
+        feature3Title: "Professional Presentation",
+        feature3Text: "Includes public pages for product overview, privacy policy, and support to prepare the app for digital distribution.",
+
+        noticeTitle: "Important Notice",
+        noticeText: "Clinical Path is presented as an educational and training resource. The content and scenarios are intended exclusively for academic use and simulation. This website does not present the application as a tool for real-world patient diagnosis, treatment, monitoring, or emergency care.",
+
+        footerText: "Educational clinical reasoning simulator for academic and training environments.",
+        footerPrivacy: "Privacy Policy",
+        footerSupport: "Support"
+      }
+    };
+
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+
+      document.getElementById("btn-es").classList.toggle("active", lang === "es");
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+
+      localStorage.setItem("clinicalPathLang", lang);
+    }
+
+    document.getElementById("btn-es").addEventListener("click", () => setLanguage("es"));
+    document.getElementById("btn-en").addEventListener("click", () => setLanguage("en"));
+
+    const savedLang = localStorage.getItem("clinicalPathLang");
+    const browserLang = navigator.language && navigator.language.toLowerCase().startsWith("es") ? "es" : "en";
+    setLanguage(savedLang || browserLang);
+  </script>
+</body>
+</html>
