@@ -1,18 +1,231 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clinical Path</title>
-</head>
-<body>
-  <h1>Clinical Path</h1>
-  <p>Educational Clinical Reasoning Simulator</p>
-  <p>This website provides app information, privacy policy, and support.</p>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clinical Path</title>
+<meta name="description" content="Clinical Path - Educational Clinical Reasoning Simulator / Simulador docente de razonamiento clínico" />
+<style>
+:root{
+--bg: #f4f7fb;
+--surface: #ffffff;
+--surface-2: #eef4ff;
+--text: #16304a;
+--muted: #5f7185;
+--primary: #1d5fa7;
+--primary-2: #2c7be5;
+--border: #d8e3f0;
+--shadow: 0 16px 40px rgba(20, 45, 80, 0.10);
+--radius: 20px;
+--max: 1120px;
+}
 
-  <ul>
-    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-    <li><a href="support.html">Support</a></li>
-  </ul>
-</body>
-</html>
+* { box-sizing: border-box; }
+
+html {
+scroll-behavior: smooth;
+}
+
+body {
+margin: 0;
+font-family: "Segoe UI", Arial, sans-serif;
+background:
+radial-gradient(circle at top left, #dfeeff 0%, transparent 28%),
+radial-gradient(circle at top right, #e8f3ff 0%, transparent 22%),
+var(--bg);
+color: var(--text);
+line-height: 1.6;
+}
+
+a {
+color: inherit;
+text-decoration: none;
+}
+
+.container {
+width: min(100% - 32px, var(--max));
+margin: 0 auto;
+}
+
+.topbar {
+position: sticky;
+top: 0;
+z-index: 20;
+backdrop-filter: blur(10px);
+background: rgba(244, 247, 251, 0.85);
+border-bottom: 1px solid rgba(216, 227, 240, 0.8);
+}
+
+.topbar-inner {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 16px;
+padding: 14px 0;
+}
+
+.brand {
+display: flex;
+align-items: center;
+gap: 12px;
+font-weight: 700;
+font-size: 1.1rem;
+letter-spacing: 0.2px;
+}
+
+.brand-mark {
+width: 42px;
+height: 42px;
+border-radius: 14px;
+background: linear-gradient(135deg, var(--primary), var(--primary-2));
+display: grid;
+place-items: center;
+color: #fff;
+font-size: 1.05rem;
+box-shadow: 0 10px 22px rgba(44, 123, 229, 0.25);
+}
+
+.nav {
+display: flex;
+align-items: center;
+gap: 10px;
+flex-wrap: wrap;
+}
+
+.nav a,
+.lang-btn {
+border: 1px solid var(--border);
+background: #fff;
+color: var(--text);
+padding: 10px 14px;
+border-radius: 999px;
+font-size: 0.95rem;
+transition: 0.2s ease;
+cursor: pointer;
+}
+
+.nav a:hover,
+.lang-btn:hover {
+transform: translateY(-1px);
+border-color: #bfd2e7;
+box-shadow: 0 8px 18px rgba(20, 45, 80, 0.08);
+}
+
+.lang-switch {
+display: flex;
+gap: 8px;
+}
+
+.lang-btn.active {
+background: linear-gradient(135deg, var(--primary), var(--primary-2));
+color: #fff;
+border-color: transparent;
+}
+
+.hero {
+padding: 64px 0 36px;
+}
+
+.hero-grid {
+display: grid;
+grid-template-columns: 1.15fr 0.85fr;
+gap: 28px;
+align-items: stretch;
+}
+
+.hero-card,
+.card {
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: var(--radius);
+box-shadow: var(--shadow);
+}
+
+.hero-card {
+padding: 42px;
+position: relative;
+overflow: hidden;
+}
+
+.hero-card::after {
+content: "";
+position: absolute;
+right: -80px;
+top: -80px;
+width: 220px;
+height: 220px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(44,123,229,0.15) 0%, rgba(44,123,229,0.02) 65%, transparent 70%);
+pointer-events: none;
+}
+
+.eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+background: var(--surface-2);
+color: var(--primary);
+padding: 8px 14px;
+border-radius: 999px;
+border: 1px solid #d5e6ff;
+font-size: 0.9rem;
+font-weight: 600;
+margin-bottom: 18px;
+}
+
+h1 {
+margin: 0 0 12px;
+font-size: clamp(2rem, 4vw, 3.35rem);
+line-height: 1.08;
+letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+font-size: 1.18rem;
+color: var(--muted);
+max-width: 760px;
+margin: 0 0 22px;
+}
+
+.hero-copy {
+color: var(--muted);
+max-width: 760px;
+margin: 0 0 28px;
+}
+
+.cta-row {
+display: flex;
+gap: 12px;
+flex-wrap: wrap;
+margin-bottom: 24px;
+}
+
+.btn {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+padding: 13px 18px;
+border-radius: 14px;
+font-weight: 600;
+border: 1px solid var(--border);
+transition: 0.2s ease;
+}
+
+.btn-primary {
+background: linear-gradient(135deg, var(--primary), var(--primary-2));
+color: #fff;
+border-color: transparent;
+box-shadow: 0 14px 30px rgba(44, 123, 229, 0.25);
+}
+
+.btn-secondary {
+background: #fff;
+color: var(--text);
+}
+
+.btn:hover {
+transform: translateY(-1px);
+}
+
+.hero-note {
