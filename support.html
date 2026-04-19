@@ -1,25 +1,325 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clinical Path - Support</title>
+  <meta name="description" content="Clinical Path - Support / Soporte" />
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <style>
+    :root{
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-2: #eef4ff;
+      --surface-3: #f8fbff;
+      --text: #16304a;
+      --muted: #5f7185;
+      --primary: #1d5fa7;
+      --primary-2: #2c7be5;
+      --border: #d8e3f0;
+      --shadow: 0 16px 40px rgba(20, 45, 80, 0.10);
+      --radius: 20px;
+      --max: 1120px;
+      --warn-bg: #fff9f0;
+      --warn-border: #f0dcc0;
+      --warn-text: #74551f;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, #dfeeff 0%, transparent 28%),
+        radial-gradient(circle at top right, #e8f3ff 0%, transparent 22%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(100% - 32px, var(--max)); margin: 0 auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 20; backdrop-filter: blur(10px);
+      background: rgba(244, 247, 251, 0.85);
+      border-bottom: 1px solid rgba(216, 227, 240, 0.8);
+    }
+    .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.2px; }
+    .brand-mark {
+      width: 42px; height: 42px; flex: 0 0 42px; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; border-radius: 10px; background: transparent;
+    }
+    .brand-logo { width: 100%; height: 100%; object-fit: contain; display: block; background: transparent; }
+    .nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .nav a, .lang-btn {
+      border: 1px solid var(--border); background: #fff; color: var(--text); padding: 10px 14px;
+      border-radius: 999px; font-size: 0.95rem; transition: 0.2s ease; cursor: pointer;
+    }
+    .nav a:hover, .lang-btn:hover {
+      transform: translateY(-1px); border-color: #bfd2e7; box-shadow: 0 8px 18px rgba(20, 45, 80, 0.08);
+    }
+    .lang-switch { display: flex; gap: 8px; }
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: #fff; border-color: transparent;
+    }
+    .hero { padding: 56px 0 26px; }
+    .hero-card, .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .hero-card { padding: 42px; position: relative; overflow: hidden; }
+    .hero-card::after {
+      content: ""; position: absolute; right: -80px; top: -80px; width: 220px; height: 220px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(44,123,229,0.15) 0%, rgba(44,123,229,0.02) 65%, transparent 70%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2); color: var(--primary);
+      padding: 8px 14px; border-radius: 999px; border: 1px solid #d5e6ff; font-size: 0.9rem; font-weight: 600;
+      margin-bottom: 18px;
+    }
+    h1 { margin: 0 0 12px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.08; letter-spacing: -0.02em; }
+    .hero-subtitle { font-size: 1.18rem; color: var(--muted); max-width: 860px; margin: 0 0 22px; }
+    .hero-copy { color: var(--muted); max-width: 900px; margin: 0; }
+    .section { padding: 18px 0 34px; }
+    .section-title { font-size: clamp(1.5rem, 2.5vw, 2.1rem); margin: 0 0 8px; }
+    .section-subtitle { margin: 0 0 22px; color: var(--muted); max-width: 840px; }
+    .grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .card { padding: 26px; }
+    .stack { display: grid; gap: 16px; }
+    .support-block {
+      padding: 18px; background: var(--surface-3); border: 1px solid #deebf8; border-radius: 18px;
+    }
+    .support-block h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .support-block p, .support-block li { margin: 0; color: var(--muted); }
+    .support-block ul { margin: 10px 0 0 18px; padding: 0; }
+    .callout {
+      margin-top: 18px; padding: 20px 22px; border-radius: 18px; background: var(--warn-bg);
+      border: 1px solid var(--warn-border); color: var(--warn-text);
+    }
+    .callout h3 { margin: 0 0 8px; font-size: 1.02rem; }
+    .footer { padding: 24px 0 42px; }
+    .footer-card {
+      display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center;
+      padding: 22px 24px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; box-shadow: 0 10px 25px rgba(20, 45, 80, 0.06);
+    }
+    .footer-text { color: var(--muted); max-width: 760px; }
+    .footer-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .footer-links a { padding: 10px 14px; border: 1px solid var(--border); border-radius: 999px; background: #fff; }
+    @media (max-width: 960px) {
+      .grid-main { grid-template-columns: 1fr; }
+      .hero-card { padding: 30px 24px; }
+    }
+    @media (max-width: 640px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; }
+      .nav { width: 100%; }
+      .footer-card { padding: 20px; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Support</h1>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark"><img src="logo.png" alt="Clinical Path logo" class="brand-logo"></div>
+        <span>Clinical Path</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" data-i18n="navHome">Home</a>
+        <a href="simulation-example.html" data-i18n="navExample">Simulation Example</a>
+        <a href="privacy-policy.html" data-i18n="navPrivacy">Privacy Policy</a>
+        <a href="support.html" data-i18n="navSupport">Support</a>
+        <div class="lang-switch">
+          <button class="lang-btn active" id="btn-es" type="button">ES</button>
+          <button class="lang-btn" id="btn-en" type="button">EN</button>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-  <p>Thank you for using <strong>Clinical Path</strong>.</p>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="eyebrow" data-i18n="eyebrow">Soporte</div>
+          <h1 data-i18n="heroTitle">Canales de contacto y atención al usuario</h1>
+          <p class="hero-subtitle" data-i18n="heroSubtitle">Esta página está pensada para ofrecer una vía clara de soporte, resolver dudas frecuentes y reforzar la presentación profesional de Clinical Path.</p>
+          <p class="hero-copy" data-i18n="heroCopy">Puedes personalizarla con tu correo de soporte, nombre del titular, respuestas frecuentes, información técnica y cualquier otro dato que quieras mostrar a usuarios, revisores o instituciones.</p>
+        </div>
+      </div>
+    </section>
 
-  <p>Clinical Path is an educational clinical reasoning simulator created for academic and training purposes.</p>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="sectionTitle">Contenido sugerido para la página de soporte</h2>
+        <p class="section-subtitle" data-i18n="sectionSubtitle">Aquí tienes una estructura limpia y coherente con el diseño del sitio para presentar ayuda y contacto.</p>
+        <div class="grid-main">
+          <div class="card">
+            <div class="stack">
+              <div class="support-block">
+                <h3 data-i18n="b1t">Contacto principal</h3>
+                <p data-i18n="b1p">Incluye aquí tu correo de soporte oficial, que puede ser el mismo que uses en Google Play, App Store y en la política de privacidad.</p>
+              </div>
+              <div class="support-block">
+                <h3 data-i18n="b2t">Ámbito del soporte</h3>
+                <p data-i18n="b2p">Explica brevemente qué tipo de ayuda ofreces: acceso a la app, dudas funcionales, incidencias técnicas, consultas de publicación o información institucional.</p>
+              </div>
+              <div class="support-block">
+                <h3 data-i18n="b3t">Tiempo de respuesta</h3>
+                <p data-i18n="b3p">Puedes indicar un plazo estimado de respuesta, por ejemplo entre 24 y 72 horas hábiles, para dar una expectativa clara al usuario.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stack">
+              <div class="support-block">
+                <h3 data-i18n="b4t">Preguntas frecuentes</h3>
+                <p data-i18n="b4p">Añade una pequeña sección FAQ para responder dudas comunes sobre idioma, finalidad educativa, compatibilidad, acceso o actualizaciones.</p>
+              </div>
+              <div class="support-block">
+                <h3 data-i18n="b5t">Uso previsto</h3>
+                <p data-i18n="b5p">Recuerda mantener visible que Clinical Path se presenta como un simulador docente y no como una herramienta destinada a la atención clínica real de pacientes.</p>
+              </div>
+              <div class="support-block">
+                <h3 data-i18n="b6t">Datos personalizables</h3>
+                <p data-i18n="b6p">Sustituye los textos de ejemplo por tu correo, nombre del titular, país, horarios de atención o cualquier dato que desees incluir.</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <h2>Contact Support</h2>
-  <p>If you need help, have questions, or want to report an issue, please contact:</p>
+        <div class="card" style="margin-top:20px;">
+          <div class="stack">
+            <div class="support-block">
+              <h3 data-i18n="faqTitle">Ejemplos de información útil</h3>
+              <ul>
+                <li data-i18n="faq1">Correo de soporte o formulario de contacto.</li>
+                <li data-i18n="faq2">Descripción breve del producto y su finalidad educativa.</li>
+                <li data-i18n="faq3">Compatibilidad general con idiomas o versiones futuras.</li>
+                <li data-i18n="faq4">Respuestas a dudas frecuentes sobre acceso, funcionamiento o uso esperado.</li>
+                <li data-i18n="faq5">Datos del titular o entidad responsable si deseas mostrarlos.</li>
+              </ul>
+            </div>
+            <div class="callout">
+              <h3 data-i18n="calloutTitle">Aviso importante</h3>
+              <div data-i18n="calloutText">Esta página debe mantenerse alineada con la forma real en que ofreces soporte. Si publicas un correo o plazo de respuesta, conviene que luego puedas cumplirlo con regularidad.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <p><strong>alernehitaramos@gmail.com</strong></p>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card">
+        <div>
+          <strong>Clinical Path</strong>
+          <div class="footer-text" data-i18n="footerText">Simulador docente de razonamiento clínico con presencia web bilingüe y materiales públicos de apoyo para usuarios y revisores.</div>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" data-i18n="footerHome">Home</a>
+          <a href="simulation-example.html" data-i18n="footerExample">Simulation Example</a>
+          <a href="privacy-policy.html" data-i18n="footerPrivacy">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-  <h2>Important Notice</h2>
-  <p>This application is intended exclusively for educational and training use. It is not designed for real clinical practice or patient care.</p>
+  <script>
+    const translations = {
+      es: {
+        navHome: "Inicio",
+        navExample: "Ejemplo de simulación",
+        navPrivacy: "Política de Privacidad",
+        navSupport: "Soporte",
+        eyebrow: "Soporte",
+        heroTitle: "Canales de contacto y atención al usuario",
+        heroSubtitle: "Esta página está pensada para ofrecer una vía clara de soporte, resolver dudas frecuentes y reforzar la presentación profesional de Clinical Path.",
+        heroCopy: "Puedes personalizarla con tu correo de soporte, nombre del titular, respuestas frecuentes, información técnica y cualquier otro dato que quieras mostrar a usuarios, revisores o instituciones.",
+        sectionTitle: "Contenido sugerido para la página de soporte",
+        sectionSubtitle: "Aquí tienes una estructura limpia y coherente con el diseño del sitio para presentar ayuda y contacto.",
+        b1t: "Contacto principal",
+        b1p: "Incluye aquí tu correo de soporte oficial, que puede ser el mismo que uses en Google Play, App Store y en la política de privacidad.",
+        b2t: "Ámbito del soporte",
+        b2p: "Explica brevemente qué tipo de ayuda ofreces: acceso a la app, dudas funcionales, incidencias técnicas, consultas de publicación o información institucional.",
+        b3t: "Tiempo de respuesta",
+        b3p: "Puedes indicar un plazo estimado de respuesta, por ejemplo entre 24 y 72 horas hábiles, para dar una expectativa clara al usuario.",
+        b4t: "Preguntas frecuentes",
+        b4p: "Añade una pequeña sección FAQ para responder dudas comunes sobre idioma, finalidad educativa, compatibilidad, acceso o actualizaciones.",
+        b5t: "Uso previsto",
+        b5p: "Recuerda mantener visible que Clinical Path se presenta como un simulador docente y no como una herramienta destinada a la atención clínica real de pacientes.",
+        b6t: "Datos personalizables",
+        b6p: "Sustituye los textos de ejemplo por tu correo, nombre del titular, país, horarios de atención o cualquier dato que desees incluir.",
+        faqTitle: "Ejemplos de información útil",
+        faq1: "Correo de soporte o formulario de contacto.",
+        faq2: "Descripción breve del producto y su finalidad educativa.",
+        faq3: "Compatibilidad general con idiomas o versiones futuras.",
+        faq4: "Respuestas a dudas frecuentes sobre acceso, funcionamiento o uso esperado.",
+        faq5: "Datos del titular o entidad responsable si deseas mostrarlos.",
+        calloutTitle: "Aviso importante",
+        calloutText: "Esta página debe mantenerse alineada con la forma real en que ofreces soporte. Si publicas un correo o plazo de respuesta, conviene que luego puedas cumplirlo con regularidad.",
+        footerText: "Simulador docente de razonamiento clínico con presencia web bilingüe y materiales públicos de apoyo para usuarios y revisores.",
+        footerHome: "Inicio",
+        footerExample: "Ejemplo de simulación",
+        footerPrivacy: "Política de Privacidad"
+      },
+      en: {
+        navHome: "Home",
+        navExample: "Simulation Example",
+        navPrivacy: "Privacy Policy",
+        navSupport: "Support",
+        eyebrow: "Support",
+        heroTitle: "User assistance and contact channels",
+        heroSubtitle: "This page is intended to provide a clear support channel, answer common questions, and reinforce the professional presentation of Clinical Path.",
+        heroCopy: "You can customize it with your support email, owner name, frequently asked questions, technical information, and any other details you want to show users, reviewers, or institutions.",
+        sectionTitle: "Suggested content for the support page",
+        sectionSubtitle: "Here is a clean structure consistent with the rest of the site to present help and contact information.",
+        b1t: "Primary contact",
+        b1p: "Include your official support email here. It can be the same address used in Google Play, the App Store, and the privacy policy.",
+        b2t: "Scope of support",
+        b2p: "Briefly explain what kind of help you offer: app access, functional questions, technical issues, publication inquiries, or institutional information.",
+        b3t: "Response time",
+        b3p: "You may indicate an estimated response time, such as 24 to 72 business hours, to give users a clear expectation.",
+        b4t: "Frequently asked questions",
+        b4p: "Add a small FAQ section to answer common questions about language, educational purpose, compatibility, access, or updates.",
+        b5t: "Intended use",
+        b5p: "Keep visible that Clinical Path is presented as an educational simulator and not as a tool intended for real clinical care of patients.",
+        b6t: "Customizable information",
+        b6p: "Replace the sample text with your email, owner name, country, support hours, or any other details you want to include.",
+        faqTitle: "Examples of useful information",
+        faq1: "Support email or contact form.",
+        faq2: "Short description of the product and its educational purpose.",
+        faq3: "General compatibility with languages or future versions.",
+        faq4: "Answers to common questions about access, operation, or expected use.",
+        faq5: "Owner or responsible entity details if you wish to show them.",
+        calloutTitle: "Important notice",
+        calloutText: "This page should remain aligned with the real way you provide support. If you publish an email or response time, it is best to be able to comply with it consistently.",
+        footerText: "Educational clinical reasoning simulator with a bilingual web presence and public support materials for users and reviewers.",
+        footerHome: "Home",
+        footerExample: "Simulation Example",
+        footerPrivacy: "Privacy Policy"
+      }
+    };
 
-  <p><a href="index.html">Back to Home</a></p>
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang][key]) el.textContent = translations[lang][key];
+      });
+      document.getElementById("btn-es").classList.toggle("active", lang === "es");
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+      localStorage.setItem("clinicalPathLang", lang);
+    }
+
+    document.getElementById("btn-es").addEventListener("click", () => setLanguage("es"));
+    document.getElementById("btn-en").addEventListener("click", () => setLanguage("en"));
+
+    const savedLang = localStorage.getItem("clinicalPathLang");
+    const browserLang = navigator.language && navigator.language.toLowerCase().startsWith("es") ? "es" : "en";
+    setLanguage(savedLang || browserLang);
+  </script>
 </body>
 </html>
