@@ -1,32 +1,331 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clinical Path - Privacy Policy</title>
+  <meta name="description" content="Clinical Path - Privacy Policy / Política de Privacidad" />
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <style>
+    :root{
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --surface-2: #eef4ff;
+      --surface-3: #f8fbff;
+      --text: #16304a;
+      --muted: #5f7185;
+      --primary: #1d5fa7;
+      --primary-2: #2c7be5;
+      --border: #d8e3f0;
+      --shadow: 0 16px 40px rgba(20, 45, 80, 0.10);
+      --radius: 20px;
+      --max: 1120px;
+      --warn-bg: #fff9f0;
+      --warn-border: #f0dcc0;
+      --warn-text: #74551f;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, #dfeeff 0%, transparent 28%),
+        radial-gradient(circle at top right, #e8f3ff 0%, transparent 22%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(100% - 32px, var(--max)); margin: 0 auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 20; backdrop-filter: blur(10px);
+      background: rgba(244, 247, 251, 0.85);
+      border-bottom: 1px solid rgba(216, 227, 240, 0.8);
+    }
+    .topbar-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 0;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.2px;
+    }
+    .brand-mark {
+      width: 42px; height: 42px; flex: 0 0 42px; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; border-radius: 10px; background: transparent;
+    }
+    .brand-logo { width: 100%; height: 100%; object-fit: contain; display: block; background: transparent; }
+    .nav { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .nav a, .lang-btn {
+      border: 1px solid var(--border); background: #fff; color: var(--text); padding: 10px 14px;
+      border-radius: 999px; font-size: 0.95rem; transition: 0.2s ease; cursor: pointer;
+    }
+    .nav a:hover, .lang-btn:hover {
+      transform: translateY(-1px); border-color: #bfd2e7; box-shadow: 0 8px 18px rgba(20, 45, 80, 0.08);
+    }
+    .lang-switch { display: flex; gap: 8px; }
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2)); color: #fff; border-color: transparent;
+    }
+    .hero { padding: 56px 0 26px; }
+    .hero-card, .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .hero-card {
+      padding: 42px; position: relative; overflow: hidden;
+    }
+    .hero-card::after {
+      content: ""; position: absolute; right: -80px; top: -80px; width: 220px; height: 220px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(44,123,229,0.15) 0%, rgba(44,123,229,0.02) 65%, transparent 70%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; background: var(--surface-2); color: var(--primary);
+      padding: 8px 14px; border-radius: 999px; border: 1px solid #d5e6ff; font-size: 0.9rem; font-weight: 600;
+      margin-bottom: 18px;
+    }
+    h1 { margin: 0 0 12px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.08; letter-spacing: -0.02em; }
+    .hero-subtitle { font-size: 1.18rem; color: var(--muted); max-width: 860px; margin: 0 0 22px; }
+    .hero-copy { color: var(--muted); max-width: 900px; margin: 0; }
+    .section { padding: 18px 0 34px; }
+    .section-title { font-size: clamp(1.5rem, 2.5vw, 2.1rem); margin: 0 0 8px; }
+    .section-subtitle { margin: 0 0 22px; color: var(--muted); max-width: 840px; }
+    .grid-main { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .card { padding: 26px; }
+    .stack { display: grid; gap: 16px; }
+    .policy-block {
+      padding: 18px; background: var(--surface-3); border: 1px solid #deebf8; border-radius: 18px;
+    }
+    .policy-block h3 { margin: 0 0 8px; font-size: 1.05rem; }
+    .policy-block p, .policy-block li { margin: 0; color: var(--muted); }
+    .policy-block ul { margin: 10px 0 0 18px; padding: 0; }
+    .callout {
+      margin-top: 18px; padding: 20px 22px; border-radius: 18px; background: var(--warn-bg);
+      border: 1px solid var(--warn-border); color: var(--warn-text);
+    }
+    .callout h3 { margin: 0 0 8px; font-size: 1.02rem; }
+    .footer { padding: 24px 0 42px; }
+    .footer-card {
+      display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center;
+      padding: 22px 24px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: 20px; box-shadow: 0 10px 25px rgba(20, 45, 80, 0.06);
+    }
+    .footer-text { color: var(--muted); max-width: 760px; }
+    .footer-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .footer-links a { padding: 10px 14px; border: 1px solid var(--border); border-radius: 999px; background: #fff; }
+    @media (max-width: 960px) {
+      .grid-main { grid-template-columns: 1fr; }
+      .hero-card { padding: 30px 24px; }
+    }
+    @media (max-width: 640px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; }
+      .nav { width: 100%; }
+      .footer-card { padding: 20px; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Privacy Policy</h1>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark"><img src="logo.png" alt="Clinical Path logo" class="brand-logo"></div>
+        <span>Clinical Path</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html" data-i18n="navHome">Home</a>
+        <a href="simulation-example.html" data-i18n="navExample">Simulation Example</a>
+        <a href="privacy-policy.html" data-i18n="navPrivacy">Privacy Policy</a>
+        <a href="support.html" data-i18n="navSupport">Support</a>
+        <div class="lang-switch">
+          <button class="lang-btn active" id="btn-es" type="button">ES</button>
+          <button class="lang-btn" id="btn-en" type="button">EN</button>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-  <p><strong>Clinical Path</strong> is an educational clinical reasoning simulator intended for academic and training purposes only.</p>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-card">
+          <div class="eyebrow" data-i18n="eyebrow">Política de Privacidad</div>
+          <h1 data-i18n="heroTitle">Compromiso con la privacidad y el uso responsable</h1>
+          <p class="hero-subtitle" data-i18n="heroSubtitle">Esta página resume cómo Clinical Path presenta su política de privacidad dentro de un entorno educativo y de simulación académica.</p>
+          <p class="hero-copy" data-i18n="heroCopy">El objetivo es comunicar con claridad qué tipo de información se maneja, con qué finalidad se muestra el contenido y cómo puede contactarse al titular o responsable del sitio.</p>
+        </div>
+      </div>
+    </section>
 
-  <p>This app is not intended for real patient care, diagnosis, treatment, or medical decision-making.</p>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title" data-i18n="sectionTitle">Contenido principal de la política</h2>
+        <p class="section-subtitle" data-i18n="sectionSubtitle">Puedes adaptar los campos de contacto, titularidad y servicios de terceros según evolucione tu proyecto.</p>
+        <div class="grid-main">
+          <div class="card">
+            <div class="stack">
+              <div class="policy-block">
+                <h3 data-i18n="b1t">Naturaleza de la aplicación</h3>
+                <p data-i18n="b1p">Clinical Path se presenta como un simulador docente de razonamiento clínico destinado a fines educativos, académicos y de entrenamiento. No se ofrece como herramienta para atención médica real.</p>
+              </div>
+              <div class="policy-block">
+                <h3 data-i18n="b2t">Información recopilada</h3>
+                <p data-i18n="b2p">La versión pública descrita en este sitio no está orientada a recopilar información identificable de pacientes reales. Cualquier contenido mostrado corresponde a simulaciones o recursos informativos del producto.</p>
+              </div>
+              <div class="policy-block">
+                <h3 data-i18n="b3t">Uso de la información</h3>
+                <p data-i18n="b3p">La información disponible en el sitio y en la aplicación se utiliza para presentar la herramienta, explicar su finalidad educativa y facilitar contacto, soporte y documentación pública.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stack">
+              <div class="policy-block">
+                <h3 data-i18n="b4t">Servicios de terceros</h3>
+                <p data-i18n="b4p">Si en el futuro se incorporan analíticas, almacenamiento en la nube o integraciones de terceros, esta política deberá actualizarse para reflejarlo con precisión.</p>
+              </div>
+              <div class="policy-block">
+                <h3 data-i18n="b5t">Contacto</h3>
+                <p data-i18n="b5p">Sustituye esta sección por tu correo de soporte, nombre del titular y cualquier otro dato de contacto o legal que decidas publicar.</p>
+              </div>
+              <div class="policy-block">
+                <h3 data-i18n="b6t">Actualizaciones</h3>
+                <p data-i18n="b6p">Se recomienda indicar una fecha de última actualización para que usuarios, revisores y tiendas puedan identificar cuándo se revisó el texto por última vez.</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <h2>Information Collection</h2>
-  <p>Clinical Path does not collect personal health data for real-patient use. Any content shown in the app is intended only for educational simulation.</p>
+        <div class="card" style="margin-top:20px;">
+          <div class="stack">
+            <div class="policy-block">
+              <h3 data-i18n="tipsTitle">Elementos recomendados para completar</h3>
+              <ul>
+                <li data-i18n="tip1">Nombre del titular o responsable.</li>
+                <li data-i18n="tip2">Correo de soporte o contacto.</li>
+                <li data-i18n="tip3">Fecha de última actualización.</li>
+                <li data-i18n="tip4">Descripción exacta de los datos recogidos, si en el futuro los hubiera.</li>
+                <li data-i18n="tip5">Servicios externos usados por la aplicación o el sitio.</li>
+              </ul>
+            </div>
+            <div class="callout">
+              <h3 data-i18n="calloutTitle">Aviso importante</h3>
+              <div data-i18n="calloutText">Esta página está pensada como una presentación clara y profesional de la política de privacidad del proyecto. Debe ajustarse a la realidad del funcionamiento de la aplicación y del sitio web antes de publicarse de forma definitiva.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <h2>Use of Information</h2>
-  <p>The app is designed to support learning, case simulation, and academic training.</p>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card">
+        <div>
+          <strong>Clinical Path</strong>
+          <div class="footer-text" data-i18n="footerText">Simulador docente de razonamiento clínico con presencia web bilingüe y documentación pública para distribución digital.</div>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" data-i18n="footerHome">Home</a>
+          <a href="simulation-example.html" data-i18n="footerExample">Simulation Example</a>
+          <a href="support.html" data-i18n="footerSupport">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-  <h2>Third-Party Services</h2>
-  <p>If future versions include analytics, cloud services, or third-party tools, this policy will be updated accordingly.</p>
+  <script>
+    const translations = {
+      es: {
+        navHome: "Inicio",
+        navExample: "Ejemplo de simulación",
+        navPrivacy: "Política de Privacidad",
+        navSupport: "Soporte",
+        eyebrow: "Política de Privacidad",
+        heroTitle: "Compromiso con la privacidad y el uso responsable",
+        heroSubtitle: "Esta página resume cómo Clinical Path presenta su política de privacidad dentro de un entorno educativo y de simulación académica.",
+        heroCopy: "El objetivo es comunicar con claridad qué tipo de información se maneja, con qué finalidad se muestra el contenido y cómo puede contactarse al titular o responsable del sitio.",
+        sectionTitle: "Contenido principal de la política",
+        sectionSubtitle: "Puedes adaptar los campos de contacto, titularidad y servicios de terceros según evolucione tu proyecto.",
+        b1t: "Naturaleza de la aplicación",
+        b1p: "Clinical Path se presenta como un simulador docente de razonamiento clínico destinado a fines educativos, académicos y de entrenamiento. No se ofrece como herramienta para atención médica real.",
+        b2t: "Información recopilada",
+        b2p: "La versión pública descrita en este sitio no está orientada a recopilar información identificable de pacientes reales. Cualquier contenido mostrado corresponde a simulaciones o recursos informativos del producto.",
+        b3t: "Uso de la información",
+        b3p: "La información disponible en el sitio y en la aplicación se utiliza para presentar la herramienta, explicar su finalidad educativa y facilitar contacto, soporte y documentación pública.",
+        b4t: "Servicios de terceros",
+        b4p: "Si en el futuro se incorporan analíticas, almacenamiento en la nube o integraciones de terceros, esta política deberá actualizarse para reflejarlo con precisión.",
+        b5t: "Contacto",
+        b5p: "Sustituye esta sección por tu correo de soporte, nombre del titular y cualquier otro dato de contacto o legal que decidas publicar.",
+        b6t: "Actualizaciones",
+        b6p: "Se recomienda indicar una fecha de última actualización para que usuarios, revisores y tiendas puedan identificar cuándo se revisó el texto por última vez.",
+        tipsTitle: "Elementos recomendados para completar",
+        tip1: "Nombre del titular o responsable.",
+        tip2: "Correo de soporte o contacto.",
+        tip3: "Fecha de última actualización.",
+        tip4: "Descripción exacta de los datos recogidos, si en el futuro los hubiera.",
+        tip5: "Servicios externos usados por la aplicación o el sitio.",
+        calloutTitle: "Aviso importante",
+        calloutText: "Esta página está pensada como una presentación clara y profesional de la política de privacidad del proyecto. Debe ajustarse a la realidad del funcionamiento de la aplicación y del sitio web antes de publicarse de forma definitiva.",
+        footerText: "Simulador docente de razonamiento clínico con presencia web bilingüe y documentación pública para distribución digital.",
+        footerHome: "Inicio",
+        footerExample: "Ejemplo de simulación",
+        footerSupport: "Soporte"
+      },
+      en: {
+        navHome: "Home",
+        navExample: "Simulation Example",
+        navPrivacy: "Privacy Policy",
+        navSupport: "Support",
+        eyebrow: "Privacy Policy",
+        heroTitle: "Commitment to privacy and responsible use",
+        heroSubtitle: "This page summarizes how Clinical Path presents its privacy policy within an educational and academic simulation environment.",
+        heroCopy: "The goal is to communicate clearly what kind of information is handled, for what purpose the content is shown, and how the owner or site administrator may be contacted.",
+        sectionTitle: "Main contents of the policy",
+        sectionSubtitle: "You can adapt contact details, ownership information, and third-party services as your project evolves.",
+        b1t: "Nature of the application",
+        b1p: "Clinical Path is presented as an educational clinical reasoning simulator intended for academic, training, and teaching purposes. It is not offered as a tool for real medical care.",
+        b2t: "Information collected",
+        b2p: "The public version described on this site is not intended to collect identifiable data from real patients. Any displayed content corresponds to simulations or public product information.",
+        b3t: "Use of information",
+        b3p: "The information available on the site and in the application is used to present the tool, explain its educational purpose, and facilitate contact, support, and public documentation.",
+        b4t: "Third-party services",
+        b4p: "If analytics, cloud storage, or third-party integrations are incorporated in the future, this policy should be updated to reflect them accurately.",
+        b5t: "Contact",
+        b5p: "Replace this section with your support email, owner name, and any other contact or legal information you decide to publish.",
+        b6t: "Updates",
+        b6p: "It is recommended to include a last updated date so users, reviewers, and app stores can identify when the text was most recently reviewed.",
+        tipsTitle: "Recommended items to complete",
+        tip1: "Owner or responsible party name.",
+        tip2: "Support or contact email.",
+        tip3: "Last updated date.",
+        tip4: "Exact description of data collected, if any in future versions.",
+        tip5: "External services used by the app or website.",
+        calloutTitle: "Important notice",
+        calloutText: "This page is intended as a clear and professional presentation of the project's privacy policy. It should be aligned with the real behavior of the application and website before final publication.",
+        footerText: "Educational clinical reasoning simulator with a bilingual web presence and public documentation for digital distribution.",
+        footerHome: "Home",
+        footerExample: "Simulation Example",
+        footerSupport: "Support"
+      }
+    };
 
-  <h2>Children's Privacy</h2>
-  <p>Clinical Path is not specifically directed to children.</p>
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang][key]) el.textContent = translations[lang][key];
+      });
+      document.getElementById("btn-es").classList.toggle("active", lang === "es");
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+      localStorage.setItem("clinicalPathLang", lang);
+    }
 
-  <h2>Contact</h2>
-  <p>For questions about this Privacy Policy, contact: <strong>alernehitaramos@gmail.com</strong></p>
+    document.getElementById("btn-es").addEventListener("click", () => setLanguage("es"));
+    document.getElementById("btn-en").addEventListener("click", () => setLanguage("en"));
 
-  <p><a href="index.html">Back to Home</a></p>
+    const savedLang = localStorage.getItem("clinicalPathLang");
+    const browserLang = navigator.language && navigator.language.toLowerCase().startsWith("es") ? "es" : "en";
+    setLanguage(savedLang || browserLang);
+  </script>
 </body>
 </html>
